@@ -4,6 +4,9 @@
         "module": "commonjs",
         "target": "ES2021",
         "esModuleInterop": true,
-        "allowJs": true
-    }
+        "allowJs": true,
+        "strictNullChecks": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
 }
