@@ -20,7 +20,7 @@
     "typescript": "*"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "test:staged": "jest",
     "husky:prepare": "husky install"
   }
