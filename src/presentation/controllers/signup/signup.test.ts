@@ -22,7 +22,7 @@ const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async add (account: AddAccountModel): Promise<AccountModel> {
       const fakeAccount = {
-        id: 1,
+        id: 'id',
         name: 'valid_name',
         email: 'valid_email@mail.com',
         password: 'valid_password'
@@ -220,7 +220,7 @@ describe('SignUp Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(200)
     expect(httpResponse.body).toEqual({
-      id: 1,
+      id: 'id',
       name: 'valid_name',
       email: 'valid_email@mail.com',
       password: 'valid_password'
