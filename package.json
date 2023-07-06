@@ -5,8 +5,10 @@
   "author": "Robson de Jesus <robson.djsilva@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.1.7",
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.5.2",
+    "@types/mongodb": "^4.0.7",
     "@types/validator": "^13.7.17",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "eslint": "^8.0.1",
