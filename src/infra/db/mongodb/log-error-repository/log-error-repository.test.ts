@@ -1,5 +1,5 @@
 import { type Collection } from 'mongodb'
-import { type LogErrorRepository } from '../../../../data/interfaces/log-error-repository'
+import { type LogErrorRepository } from '../../../../data/interfaces/db/log-error-repository'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { LogErrorMongoRepository } from './log-error-repository'
 

@@ -1,6 +1,6 @@
 import { type AccountModel } from '../../../domain/models/account'
 import { type AddAccountModel } from '../../../domain/usecases/add-account'
-import { type AddAccountRepository } from '../../interfaces/add-account-repository'
+import { type AddAccountRepository } from '../../interfaces/db/add-account-repository'
 import { type Encrypter } from '../../interfaces/encrypter'
 import { DbAddAccount } from './db-add-account'
 
