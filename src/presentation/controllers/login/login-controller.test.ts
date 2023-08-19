@@ -1,7 +1,7 @@
 import { InvalidParamError } from '../../errors'
 import { serverError, successRequest, unauthorized } from '../../helpers/http-helpers'
 import { type HttpRequest, type Controller } from '../../interfaces'
-import { LoginController } from './login'
+import { LoginController } from './login-controller'
 import { type Authentication } from '../../../domain/usecases/authentication'
 import { type Validation } from '../../interfaces/validation'
 
