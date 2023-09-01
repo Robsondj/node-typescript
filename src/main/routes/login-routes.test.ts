@@ -1,10 +1,14 @@
 import request from 'supertest'
-import { app } from '../config/app'
+import { setupApp } from '../config/app'
 import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
+import { type Express } from 'express'
+
+let app: Express
 
 describe('SignUp Route', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL ?? 'localhost')
+    app = await setupApp()
+    await MongoHelper.connect(process.env.MONGO_URL ?? 'mongodb://localhost:27017/scale-node-api')
   })
 
   afterAll(async () => {
@@ -12,11 +16,11 @@ describe('SignUp Route', () => {
   })
 
   beforeEach(async () => {
-    const accountCollection = MongoHelper.getCollection('accoutns')
+    const accountCollection = MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
 
-  test('Should return an account on success', async () => {
+  test('Should return 200 on success', async () => {
     await request(app)
       .post('/api/signup')
       .send({
