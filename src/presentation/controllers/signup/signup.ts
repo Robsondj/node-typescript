@@ -1,14 +1,18 @@
 import { type HttpRequest, type HttpResponse, type Controller, type AddAccount } from './signup-interfaces'
-import { badRequest, serverError, successRequest } from '../../helpers/http-helpers'
+import { badRequest, forbidden, serverError, successRequest } from '../../helpers/http-helpers'
 import { type Validation } from '../../interfaces/validation'
+import { type Authentication } from '../../../domain/usecases/authentication'
+import { InUseError } from '../../errors'
 
 export class SignUpController implements Controller {
   private readonly addAccount: AddAccount
   private readonly validation: Validation
+  private readonly authentication: Authentication
 
-  constructor (addAccount: AddAccount, validation: Validation) {
+  constructor (addAccount: AddAccount, validation: Validation, authentication: Authentication) {
     this.addAccount = addAccount
     this.validation = validation
+    this.authentication = authentication
   }
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -23,7 +27,11 @@ export class SignUpController implements Controller {
         email,
         password
       })
-      return successRequest(account)
+      if (account === null) {
+        return forbidden(new InUseError('Email'))
+      }
+      const token = await this.authentication.auth(email, password)
+      return successRequest(token)
     } catch (error) {
       console.log(error)
       return serverError(error.stack)
