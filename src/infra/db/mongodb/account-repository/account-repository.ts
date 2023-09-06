@@ -5,8 +5,9 @@ import { MongoHelper } from '../helpers/mongo-helper'
 import { type LoadAccountByEmailRepository } from '../../../../data/interfaces/db/load-account-by-email-repository'
 import { ObjectId, type Collection } from 'mongodb'
 import { type UpdateAccessTokenRepository } from '../../../../data/interfaces/db/update-acesstoken-repository'
+import { type CheckAccountByEmailRepository } from '../../../../data/interfaces/db/check-account-by-email-repository'
 
-export class AccountMongoRepository implements AddAccountRepository, LoadAccountByEmailRepository, UpdateAccessTokenRepository {
+export class AccountMongoRepository implements AddAccountRepository, LoadAccountByEmailRepository, UpdateAccessTokenRepository, CheckAccountByEmailRepository {
   private readonly accountCollection: Collection
 
   constructor () {
@@ -40,5 +41,14 @@ export class AccountMongoRepository implements AddAccountRepository, LoadAccount
         accessToken
       }
     })
+  }
+
+  async checkByEmail (email: string): Promise<boolean> {
+    const result = await this.accountCollection.findOne({ email }, {
+      projection: {
+        _id: 1
+      }
+    })
+    return result !== null
   }
 }

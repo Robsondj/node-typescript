@@ -72,4 +72,19 @@ describe('Account Mongo Repository', () => {
       expect(account?.accessToken).toBe(accessToken)
     })
   })
+
+  describe('checkByEmail', () => {
+    test('Should return true in case existing an account with this email', async () => {
+      await accountCollection.insertOne(accoutData)
+      const sut = makeSut()
+      const account = await sut.checkByEmail('any_email@mail.com')
+      expect(account).toBeTruthy()
+    })
+
+    test('Should return false in case not existing', async () => {
+      const sut = makeSut()
+      const account = await sut.loadByEmail(faker.internet.email())
+      expect(account).toBeFalsy()
+    })
+  })
 })
