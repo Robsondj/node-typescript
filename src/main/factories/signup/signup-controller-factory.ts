@@ -6,7 +6,7 @@ import { LogErrorMongoRepository } from '../../../infra/db/mongodb/log-error-rep
 import { SignUpController } from '../../../presentation/controllers/signup/signup'
 import { type Controller } from '../../../presentation/interfaces'
 import { LogControllerDecorator } from '../../decorators/log-controller'
-import { makeSignUpValidation } from './signup-validation'
+import { makeSignUpValidation } from './signup-validation-factory'
 
 export const makeSignUpController = (): Controller => {
   const accountMongoRepository = new AccountMongoRepository()
